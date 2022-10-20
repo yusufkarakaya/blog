@@ -1,15 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import Navigation from "../components/Navigation";
+import PortfolioCard from "../components/PortfolioCard";
 
-class Portfolio extends Component {
-  render() {
-    return (
-      <div>
-        <Navigation title={"portfolio"} />
-        something happen here
-      </div>
-    );
-  }
+function Portfolio() {
+  return (
+    <div>
+      <Navigation title={"portfolio"} />
+      <PortfolioCard
+        title={"Portfolio & Blog Website"}
+        description={"This project created by using React, tailwind, Node."}
+        link={"https://github.com/yusufkarakaya/blog"}
+      />
+    </div>
+  );
 }
 
 export default Portfolio;
