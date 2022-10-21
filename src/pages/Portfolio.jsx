@@ -11,6 +11,11 @@ function Portfolio() {
         description={"This project created by using React, tailwind, Node."}
         link={"https://github.com/yusufkarakaya/blog"}
       />
+      <PortfolioCard
+        title={"Landing Page for Brand"}
+        description={"This project created by using React, Tailwind."}
+        link={"https://github.com/yusufkarakaya/venicebazaar-landing"}
+      />
     </div>
   );
 }
