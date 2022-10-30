@@ -9,19 +9,19 @@ function Navigation(props) {
           <NavLink to={"/"}>
             <span className="group transition duration-300">
               about
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-gray-800"></span>
             </span>
           </NavLink>
           <NavLink to={"/portfolio"}>
             <span className="group transition duration-300">
               portfolio
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-gray-800"></span>
             </span>
           </NavLink>
           <NavLink to={"/blog"}>
             <span className="group transition duration-300">
               blog
-              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-gray-800"></span>
             </span>
           </NavLink>
         </ul>

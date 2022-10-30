@@ -5,6 +5,7 @@ import Home from "./Home";
 import About from "../components/About";
 import Blog from "./Blog";
 import Portfolio from "./Portfolio";
+import Login from "../components/Login";
 
 class Pages extends Component {
   render() {
@@ -14,6 +15,7 @@ class Pages extends Component {
         <Route path="/about" element={<About />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     );
   }
