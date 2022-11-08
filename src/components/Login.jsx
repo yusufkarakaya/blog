@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Admin from "../pages/Admin";
+import { NavLink } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Login extends Component {
     this.setState({ signInPassword: event.target.value });
   };
 
-  onSubmitSignIn = (event) => {
+  onSubmitSignIn = () => {
     fetch("http://localhost:3001/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -28,10 +29,8 @@ class Login extends Component {
       }),
     })
       .then((res) => res.json())
-      .catch((err) => console.log(err))
       .then((user) => {
         if (user.id) {
-          console.log(user);
           this.props.onRouteChange("admin");
         }
       })
@@ -100,7 +99,11 @@ class Login extends Component {
         </div>
       );
     } else {
-      return <Admin />;
+      return (
+        <NavLink to={"/admin"}>
+          <Admin />
+        </NavLink>
+      );
     }
   }
 }

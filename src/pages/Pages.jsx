@@ -33,6 +33,7 @@ class Pages extends Component {
         <Route path="/about" element={<About />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/admin" element={<Admin />} />
         <Route
           path="/login"
           element={
@@ -42,7 +43,6 @@ class Pages extends Component {
             />
           }
         />
-        <Route path="/admin" element={<Admin />} />
       </Routes>
     );
   }
