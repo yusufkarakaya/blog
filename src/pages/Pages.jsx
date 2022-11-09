@@ -7,6 +7,7 @@ import Blog from "./Blog";
 import Portfolio from "./Portfolio";
 import Login from "../components/Login";
 import Admin from "./Admin";
+import Register from "../components/Register";
 
 class Pages extends Component {
   constructor() {
@@ -34,6 +35,7 @@ class Pages extends Component {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/login"
           element={
