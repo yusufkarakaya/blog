@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Admin from "../pages/Admin";
-import { NavLink } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -98,12 +97,8 @@ class Login extends Component {
           </section>
         </div>
       );
-    } else {
-      return (
-        <NavLink to={"/admin"}>
-          <Admin />
-        </NavLink>
-      );
+    } else if (this.props.isSignedIn) {
+      return <Admin />;
     }
   }
 }

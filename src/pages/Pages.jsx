@@ -8,6 +8,7 @@ import Portfolio from "./Portfolio";
 import Login from "../components/Login";
 import Admin from "./Admin";
 import Register from "../components/Register";
+import PrivateRoutes from "../utils/PrivateRoutes";
 
 class Pages extends Component {
   constructor() {
@@ -34,8 +35,14 @@ class Pages extends Component {
         <Route path="/about" element={<About />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/admin" element={<Admin />} />
+
+        <Route element={<PrivateRoutes />}>
+          <Route path="/admin" element={<Admin />} exact />
+        </Route>
+
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<p>There's nothing here: 404!</p>} />
+
         <Route
           path="/login"
           element={
