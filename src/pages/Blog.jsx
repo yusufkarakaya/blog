@@ -1,6 +1,6 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
+import parse from "html-react-parser";
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -20,11 +20,12 @@ function Blog() {
     <div>
       <Navigation title={"blog"} />
 
-      <div>
+      <div className="w-7/12 m-auto">
         {posts.map((post) => (
-          <div>
-            <h1>{post.title}</h1>
-            <p>{post.description}</p>
+          <div className="">
+            <h1 className="text-center text-5xl	mb-3">{post.title}</h1>
+            {parse(post.description)}
+            <hr className="mb-3 mt-3" />
           </div>
         ))}
       </div>
