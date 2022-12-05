@@ -3,11 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 
 function Admin() {
   const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -58,19 +54,9 @@ function Admin() {
           bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           placeholder="title here"
         />
-        {/* <textarea
-          onChange={descriptionHandle}
-          contenteditable="true"
-          className="mb-2 w-full	form-control block px-3 py-1.5text-basefont-normaltext-gray-700
-        bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      "
-          id="exampleFormControlTextarea1"
-          rows="3"
-          placeholder="Your message"
-        ></textarea> */}
         <Editor
           onEditorChange={descriptionHandle}
-          apiKey="1ubt75tfzohny1j526lgdk0z7p1aqg6rb45lbwyk0mi54n37"
+          apiKey="process.env.REACT_EDITOR_API_KEY"
           onInit={(evt, editor) => (editorRef.current = editor)}
           init={{
             height: 500,
