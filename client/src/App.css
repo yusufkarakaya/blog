@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Yellowtail&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a,
+button {
+  cursor: pointer;
+}
+body {
+  font-family: 'Kanit', sans-serif;
+  background-color: #f5f6fa;
+}
+header {
+  background-color: #f5f6fa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+header nav {
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+nav {
+  max-width: 1100px;
+  margin: auto;
+}
+header nav h1 {
+  font-family: 'Yellowtail', cursive;
+  color: #232c4d;
+  font-size: 45px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  font-weight: 400;
+}
+header nav ul {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 20px;
+}
+header nav ul li {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: #06080e;
+  transition: all 0.3s ease;
+  background-color: #f5f6fa;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+header nav ul li a:hover {
+  color: whitesmoke;
+  background-color: #232c4d;
+  padding: 10px 30px;
+  border-radius: 5px;
+}
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+main section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+  margin-top: 50px;
+}
+main section h2 {
+  font-size: 2.5rem;
+  color: #232c4d;
+  text-align: left;
+}
+main section p {
+  font-size: 18px;
+  color: #06080e;
+  text-align: left;
+}
+.icon-main {
+  display: flex;
+  gap: 20px;
+}
+.icon-items {
+  list-style: none;
+}
+.icon-items a {
+  text-decoration: none;
+}
+#emailMe {
+  background-color: #ffffff;
+  color: #232c4d;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+  margin-left: 20px;
+}
+#emailMe:hover {
+  background-color: #232c4d;
+  color: whitesmoke;
+  padding: 10px 30px;
+}
+ion-icon {
+  font-size: 30px;
+  color: #232c4d;
+  transition: all 0.3s ease;
+  padding: 5px 5px;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 20px 0;
+}
+
+hr::before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: -0.5em;
+  border-top: 1px solid #ccc;
+  width: 100%;
+}
+
+hr::after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: -0.5em;
+  border-top: 1px solid #ccc;
+  width: 100%;
+}
+
+section h3 {
+  font-size: 1.5rem;
+  color: #232c4d;
+  text-align: left;
+}
+.projects {
+  list-style: none;
+  font-size: 1rem;
+  color: #06080e;
+  text-align: left;
+}
+.projects ul li a {
+  text-decoration: none;
+  color: #06080e;
+  transition: all 0.3s ease;
+}
+.projects ul li a:hover {
+  color: #232c4d;
+  text-decoration: underline;
+}
+.blog-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+  margin-top: 10px;
+}
+.post img {
+  max-width: 350px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.post {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  max-width: 960px;
+  margin: auto;
+  margin-top: 10px;
+}
+@media screen and (max-width: 768px) {
+  .post {
+    flex-direction: column;
+  }
+}
+.post h2 {
+  font-size: 1.5rem;
+  color: #232c4d;
+  line-height: normal;
+}
+.author {
+  font-size: 1rem;
+  color: #232c4d;
+}
+.post-date {
+  font-size: 1rem;
+  color: #232c4d;
+}
+.post-description {
+  margin-bottom: 6px;
+}
+.post-preview {
+  margin-top: 6px;
+}
+
+.login-main,
+.register-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 50px;
+}
+.login-main h2,
+.register-main h2 {
+  font-size: 2.5rem;
+  color: #232c4d;
+  text-align: left;
+}
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+.login-form input,
+.register-form input {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+.login-form button,
+.register-form button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  background-color: #232c4d;
+  color: whitesmoke;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+}
+.create-form input {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+.create-form button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  background-color: #232c4d;
+  color: whitesmoke;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.detail-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+  margin-top: 50px;
+}
+.detail-page h1 {
+  font-size: 2.5rem;
+  color: #232c4d;
+  text-align: center;
+}
+.detail-page span,
+time {
+  font-size: 1rem;
+  color: #232c4d;
+  text-align: center;
+}
+.detail-page img {
+  max-width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.detail-page button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  background-color: #232c4d;
+  color: whitesmoke;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.admin-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  gap: 10px;
+}
+.deletePost {
+  background-color: rgb(99, 1, 1) !important;
+  color: white;
+  width: 150px;
+  float: right;
+}
+.error-validation {
+  margin-bottom: 1rem;
+}
+.error-message {
+  color: red;
+}
+.error {
+  color: red;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
