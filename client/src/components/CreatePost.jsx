@@ -1,7 +1,7 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 const modules = {
@@ -39,7 +39,7 @@ export default function CreatePost() {
   const [files, setFiles] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [errors, setErrors] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   async function createNewPost(e) {
     e.preventDefault();
@@ -58,13 +58,17 @@ export default function CreatePost() {
         setRedirect(true);
       })
       .catch((err) => {
-        console.log(err.response);
-        const errorResponse = err.response.data.errors;
-        const errorArr = [];
-        for (const key of Object.keys(errorResponse)) {
-          errorArr.push(errorResponse[key].message);
+        if (err.response && err.response.data && err.response.data.errors) {
+          const errorResponse = err.response.data.errors;
+          const errorArr = [];
+          for (const key of Object.keys(errorResponse)) {
+            errorArr.push(errorResponse[key].message);
+          }
+          setErrors(errorArr);
+        } else {
+          console.log(err); // Log the error for debugging purposes
+          setErrors(['An unexpected error occurred.']);
         }
-        setErrors(errorArr);
       });
   }
 

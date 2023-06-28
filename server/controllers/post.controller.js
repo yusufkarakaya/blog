@@ -34,7 +34,7 @@ module.exports = {
                 summary,
                 content,
                 cover: newPath,
-                author: info._id,
+                author: info.id,
               });
               res.json(postDoc);
             } catch (err) {
@@ -97,7 +97,7 @@ module.exports = {
             const post = await Post.findById(id);
 
             // Check if the user is the author of the post
-            if (post.author.toString() !== info._id.toString()) {
+            if (post.author.toString() !== info.id.toString()) {
               return res.status(403).json({ message: 'Unauthorized' });
             }
 

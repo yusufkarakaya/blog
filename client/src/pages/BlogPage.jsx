@@ -5,12 +5,12 @@ import axios from 'axios';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([]);
-  console.log(posts);
   useEffect(() => {
     axios
       .get('http://localhost:8000/api/getposts')
       .then((response) => {
         setPosts(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);

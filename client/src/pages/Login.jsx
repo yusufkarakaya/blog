@@ -26,7 +26,6 @@ export default function Login() {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data.id);
         setUserContextInfo(res.data.id);
         navigate('/');
       })

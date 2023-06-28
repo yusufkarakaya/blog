@@ -15,7 +15,7 @@ module.exports = {
         );
 
         res
-          .cookie('usertoken', userToken, {
+          .cookie('userToken', userToken, {
             httpOnly: true,
           })
           .json({ msg: 'success!', user: user });
@@ -50,20 +50,20 @@ module.exports = {
 
     // note that the response object allows chained calls to cookie and json
     res
-      .cookie('usertoken', userToken, {
+      .cookie('userToken', userToken, {
         httpOnly: true,
       })
       .json({ id: user._id, email: user.email });
   },
 
   logout: (req, res) => {
-    res.clearCookie('usertoken');
+    res.clearCookie('userToken');
     res.sendStatus(200);
   },
 
   getProfile: (req, res) => {
     const user = User.findOne({ email: req.body.email });
-    jwt.verify(req.cookies.usertoken, secret, (err, payload) => {
+    jwt.verify(req.cookies.userToken, secret, (err, payload) => {
       if (err) {
         res.status(401).json({ verified: false });
       } else {

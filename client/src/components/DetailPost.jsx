@@ -15,19 +15,19 @@ export default function DetailPost() {
     axios
       .get(`http://localhost:8000/api/getpost/${id}`)
       .then((res) => {
-        console.log(res.data);
         setPostInfo(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, []);
 
   function deletePost() {
     axios
       .delete(`http://localhost:8000/api/deletepost/${id}`)
       .then((res) => {
         console.log(res.data);
+
         navigate('/blog');
       })
       .catch((err) => {
@@ -51,9 +51,9 @@ export default function DetailPost() {
             <span>by @{postInfo.author?.username}</span> <span> | </span>
             <time> {postDate} </time>
           </div>
-          {userContextInfo === postInfo.author?.email && (
+          {userContextInfo?.id === postInfo.author?._id && (
             <div>
-              <Link to={`/editpost/${postInfo._id}`}>
+              <Link to={`/editpost/${postInfo?._id}`}>
                 <button className='editPost'>Edit Post</button>
               </Link>
             </div>
@@ -61,7 +61,7 @@ export default function DetailPost() {
         </div>
         <img src={'http://localhost:8000/' + postInfo.cover} alt='blog post' />
         <p dangerouslySetInnerHTML={{ __html: postInfo.content }}></p>
-        {userContextInfo === postInfo.author?.email && (
+        {userContextInfo?.id === postInfo.author?._id && (
           <button onClick={() => deletePost()} className='deletePost'>
             Delete Post
           </button>
