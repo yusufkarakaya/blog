@@ -4,64 +4,71 @@ const secret = process.env.SECRET_KEY;
 const bcrypt = require('bcrypt');
 
 module.exports = {
-  register: async (req, res) => {
-    try {
-      const potentialUser = await User.findOne({ email: req.body.email });
-      if (potentialUser) {
-        res.status(400).json({ message: 'User already exists' });
-      } else {
-        const newUser = await User.create(req.body);
-
+  register: (req, res) => {
+    User.create(req.body)
+      .then((user) => {
         const userToken = jwt.sign(
-          { _id: newUser._id, email: newUser.email },
-          secret
+          {
+            id: user._id,
+          },
+          process.env.SECRET_KEY
         );
 
         res
-          .status(201)
-          .cookie('userToken', userToken, { httpOnly: true })
-          .json({ newUser });
-      }
-    } catch (err) {
-      res.status(400).json(err);
-    }
+          .cookie('usertoken', userToken, {
+            httpOnly: true,
+          })
+          .json({ msg: 'success!', user: user });
+      })
+      .catch((err) => res.json(err));
   },
   login: async (req, res) => {
-    try {
-      const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email });
 
-      if (user) {
-        const passwordMatch = await bcrypt.compare(
-          req.body.password,
-          user.password
-        );
-        if (passwordMatch) {
-          const userToken = jwt.sign(
-            { _id: user._id, email: user.email },
-            secret
-          );
-          res.cookie('userToken', userToken, { httpOnly: true }).json({ user });
-        } else {
-          res.status(400).json({ message: 'Invalid login attempt' });
-        }
-      } else {
-        res.status(400).json({ message: 'Email or Password is wrong!' });
-      }
-    } catch (err) {
-      res.status(400).json(err);
+    if (user === null) {
+      // email not found in users collection
+      return res.sendStatus(400);
     }
+
+    const correctPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!correctPassword) {
+      // password wasn't a match!
+      return res.sendStatus(400);
+    }
+
+    // if we made it this far, the password was correct
+    const userToken = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.SECRET_KEY
+    );
+
+    // note that the response object allows chained calls to cookie and json
+    res
+      .cookie('usertoken', userToken, {
+        httpOnly: true,
+      })
+      .json({ id: user._id, email: user.email });
   },
 
   logout: (req, res) => {
-    res.clearCookie('userToken');
+    res.clearCookie('usertoken');
     res.sendStatus(200);
   },
 
   getProfile: (req, res) => {
-    const token = req.cookies.userToken;
-    jwt.verify(token, secret, {}, (err, info) => {
-      if (err) throw err;
-      res.json(info);
+    const user = User.findOne({ email: req.body.email });
+    jwt.verify(req.cookies.usertoken, secret, (err, payload) => {
+      if (err) {
+        res.status(401).json({ verified: false });
+      } else {
+        res.json({ verified: true, payload: payload });
+      }
     });
   },
 };

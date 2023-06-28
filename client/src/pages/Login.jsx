@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import react, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 export default function Login() {
+  const { setUserContextInfo } = useContext(UserContext);
+
   const [userLogin, setUserLogin] = useState({
     _id: '',
     email: '',
     password: '',
   });
+
   const [errors, setErrors] = useState('');
   const navigate = useNavigate();
 
@@ -22,6 +26,8 @@ export default function Login() {
         withCredentials: true,
       })
       .then((res) => {
+        console.log(res.data.id);
+        setUserContextInfo(res.data.id);
         navigate('/');
       })
       .catch((err) => {

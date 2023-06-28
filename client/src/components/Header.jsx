@@ -5,28 +5,26 @@ import { UserContext } from '../context/UserContext';
 
 export default function Header() {
   const navigate = useNavigate();
-  // const [user, setUser] = useState(null);
   const { userContextInfo, setUserContextInfo } = useContext(UserContext);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/api/profile', {
-        withCredentials: true,
-      })
+    fetch('http://localhost:8000/api/profile', {
+      credentials: 'include',
+    })
       .then((res) => {
-        console.log(res);
-        setUserContextInfo(res.data.email);
+        res.json().then((userInfo) => {
+          setUserContextInfo(userInfo.payload);
+        });
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [setUserContextInfo]);
+  }, []);
 
   const handleLogout = () => {
     axios
       .post('http://localhost:8000/api/logout', {}, { withCredentials: true })
       .then((res) => {
-        console.log(res);
         setUserContextInfo(null);
         navigate('/');
       })
