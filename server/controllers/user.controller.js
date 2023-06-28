@@ -4,65 +4,81 @@ const secret = process.env.SECRET_KEY;
 const bcrypt = require('bcrypt');
 
 module.exports = {
-  register: (req, res) => {
-    User.create(req.body)
-      .then((user) => {
-        const userToken = jwt.sign(
-          {
-            id: user._id,
-          },
-          process.env.SECRET_KEY
-        );
+  register: async (req, res) => {
+    try {
+      const user = await User.create(req.body);
 
-        res
-          .cookie('userToken', userToken, {
-            httpOnly: true,
-          })
-          .json({ msg: 'success!', user: user });
-      })
-      .catch((err) => res.json(err));
+      const userToken = jwt.sign(
+        {
+          id: user._id,
+        },
+        secret
+      );
+
+      res
+        .cookie('userToken', userToken, {
+          httpOnly: true,
+          secure: true, // Set 'secure' to true if using HTTPS
+          sameSite: 'strict', // Adjust sameSite value based on your requirements
+        })
+        .json({
+          msg: 'success!',
+          user: { id: user._id },
+        });
+    } catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
   },
+
   login: async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
+    try {
+      const user = await User.findOne({ email: req.body.email });
 
-    if (user === null) {
-      // email not found in users collection
-      return res.sendStatus(400);
+      if (!user) {
+        return res.status(400).json({ error: 'Invalid email or password' });
+      }
+
+      const correctPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+
+      if (!correctPassword) {
+        return res.status(400).json({ error: 'Invalid email or password' });
+      }
+
+      const userToken = jwt.sign(
+        {
+          id: user._id,
+        },
+        secret
+      );
+
+      res
+        .cookie('userToken', userToken, {
+          httpOnly: true,
+          secure: true, // Set 'secure' to true if using HTTPS
+          sameSite: 'strict', // Adjust sameSite value based on your requirements
+        })
+        .json({
+          msg: 'success!',
+          user: { id: user._id },
+        });
+    } catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
     }
-
-    const correctPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-
-    if (!correctPassword) {
-      // password wasn't a match!
-      return res.sendStatus(400);
-    }
-
-    // if we made it this far, the password was correct
-    const userToken = jwt.sign(
-      {
-        id: user._id,
-      },
-      process.env.SECRET_KEY
-    );
-
-    // note that the response object allows chained calls to cookie and json
-    res
-      .cookie('userToken', userToken, {
-        httpOnly: true,
-      })
-      .json({ id: user._id, email: user.email });
   },
 
   logout: (req, res) => {
-    res.clearCookie('userToken');
+    res.clearCookie('userToken', {
+      httpOnly: true,
+      secure: true, // Set 'secure' to true if using HTTPS
+      sameSite: 'strict', // Adjust sameSite value based on your requirements
+    });
     res.sendStatus(200);
   },
 
   getProfile: (req, res) => {
-    const user = User.findOne({ email: req.body.email });
     jwt.verify(req.cookies.userToken, secret, (err, payload) => {
       if (err) {
         res.status(401).json({ verified: false });

@@ -1,8 +1,9 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 const modules = {
   toolbar: [
@@ -39,7 +40,12 @@ export default function CreatePost() {
   const [files, setFiles] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [errors, setErrors] = useState([]);
-  // const navigate = useNavigate();
+
+  const { isAuthenticated } = useContext(AuthContext);
+
+  if (!isAuthenticated) {
+    return <Navigate to='/login' />;
+  }
 
   async function createNewPost(e) {
     e.preventDefault();

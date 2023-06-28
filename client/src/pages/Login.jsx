@@ -1,10 +1,12 @@
-import react, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Login() {
   const { setUserContextInfo } = useContext(UserContext);
+  const { setAuthStatus } = useContext(AuthContext);
 
   const [userLogin, setUserLogin] = useState({
     _id: '',
@@ -27,6 +29,7 @@ export default function Login() {
       })
       .then((res) => {
         setUserContextInfo(res.data.id);
+        setAuthStatus(true);
         navigate('/');
       })
       .catch((err) => {

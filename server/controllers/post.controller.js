@@ -132,8 +132,6 @@ module.exports = {
 
   deletePost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-
       // Check if the user is the author of the post
       await Post.findByIdAndDelete(req.params.id);
       res.json({ message: 'Post deleted successfully' });

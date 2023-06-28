@@ -14,7 +14,6 @@ export default function Header() {
       .then((res) => {
         res.json().then((userInfo) => {
           setUserContextInfo(userInfo.payload);
-          // console.log(userInfo);
         });
       })
       .catch((err) => {

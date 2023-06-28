@@ -8,21 +8,24 @@ import DetailPost from './components/DetailPost';
 import EditPost from './components/EditPost';
 import { Route, Routes } from 'react-router-dom';
 import { UserContextProvider } from './context/UserContext';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
     <div>
-      <UserContextProvider>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/blog' element={<BlogPage />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/createpost' element={<CreatePost />} />
-          <Route path='/detailpost/:id' element={<DetailPost />} />
-          <Route path='/editpost/:id' element={<EditPost />} />
-        </Routes>
-      </UserContextProvider>
+      <AuthProvider>
+        <UserContextProvider>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/blog' element={<BlogPage />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/createpost' element={<CreatePost />} />
+            <Route path='/detailpost/:id' element={<DetailPost />} />
+            <Route path='/editpost/:id' element={<EditPost />} />
+          </Routes>
+        </UserContextProvider>
+      </AuthProvider>
     </div>
   );
 }
