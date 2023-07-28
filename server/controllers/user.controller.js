@@ -7,14 +7,12 @@ module.exports = {
   register: async (req, res) => {
     try {
       const user = await User.create(req.body);
-
       const userToken = jwt.sign(
         {
           id: user._id,
         },
         secret
       );
-
       res
         .cookie('userToken', userToken, {
           httpOnly: true,
@@ -33,7 +31,6 @@ module.exports = {
   login: async (req, res) => {
     try {
       const user = await User.findOne({ email: req.body.email });
-
       if (!user) {
         return res.status(400).json({ error: 'Invalid email or password' });
       }
