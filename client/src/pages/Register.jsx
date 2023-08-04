@@ -20,9 +20,7 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8000/api/register', user, {
-        withCredentials: true,
-      })
+      .post('http://localhost:8000/api/register', user)
       .then((res) => {
         console.log(res);
         navigate('/login');
