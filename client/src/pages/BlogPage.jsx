@@ -13,7 +13,7 @@ export default function BlogPage() {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error, 'here is the error front-end');
       });
   }, []);
 
