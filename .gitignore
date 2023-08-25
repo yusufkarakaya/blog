@@ -1,8 +1,46 @@
-node_modules/
-coverage/
-build/
-.DS_Store
-.env
+# Logs
+logs
+*.log
 
-/node_modules
-package-lock.json
+# Dependency directories
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment variables
+.env
+client/.env
+server/.env
+
+# Build output
+build/
+client/build/
+server/build/
+
+# Compiled binary files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+*.woff
+*.woff2
+*.eot
+*.ttf
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Test coverage reports
+coverage/

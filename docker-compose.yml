@@ -1,0 +1,24 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./client # Path to your React app
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./server # Path to your Node.js/Express app
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    environment:
+      MONGO_URI: mongodb+srv://blog:b7seY5Z0IFCWBmU6@cluster0.hpx3ezr.mongodb.net # Replace with your MongoDB connection URI
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
